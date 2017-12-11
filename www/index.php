@@ -129,7 +129,7 @@ class WebFrontend
 				// Also push any answer values that are variables as goals to be solved.
 				foreach ($goal->answers as $answer)
 					if (KnowledgeState::is_variable($answer->value))
-						$state->goalStack->push(KnowledgeState::variable_name($answer->value));	
+						$state->goalStack->push(KnowledgeState::variable_name($answer->value));
 			}
 
 		return $state;
@@ -139,7 +139,7 @@ class WebFrontend
 	{
 		$reader = new KnowledgeBaseReader;
 		$state = $reader->parse($file);
-		
+
 		return $state;
 	}
 
@@ -156,5 +156,5 @@ class WebFrontend
 // 	redirect('index.php');
 
 header('Content-Type: text/html; charset=UTF-8');
-$frontend = new WebFrontend('../knowledgebases/knowledge.xml');
+$frontend = new WebFrontend('../knowledgebases/crossing.xml');
 $frontend->main();
