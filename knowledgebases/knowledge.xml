@@ -1,90 +1,283 @@
 <?xml version="1.0"?>
+
 <knowledge>
-	<title>Brandveiligheid</title>
-	<description>Welke voorzieningen moeten er aanwezig zijn?</description>
+	<title>Music piece identification?</title>
+	<description>description here</description>
+
+<!--  has orchestra / no singing -->
+
 
 	<rule>
-		<description>De regels zijn van toepassing</description>
+		<description>It is a symphony</description>
 		<if>
 			<and>
-				<fact name="is_gebouw">yes</fact>
-				<fact name="heeft_brandcompartiment">yes</fact>
+				<fact name="has_orchestra">yes</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_structure">4parts</fact>
 			</and>
 		</if>
-		<then>
-			<fact name="regels_van_toepassing">yes</fact>
-		</then>
+			<then>
+				<fact name="has_form">symphony</fact>
+			</then>
 	</rule>
 
 	<rule>
-		<description>Het gaat om een gebouw</description>
+		<description>It is a concerto</description>
 		<if>
-			<or>
-				<fact name="gebruiksfunctie">woonfunctie</fact>
-				<fact name="gebruiksfunctie">industriefunctie</fact>
-				<fact name="gebruiksfunctie">kantoorfunctie</fact>
-				<fact name="gebruiksfunctie">winkelfunctie</fact>
-			</or>
+			<and>
+				<fact name="has_orchestra">yes</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_structure">dialogue</fact>
+			</and>
 		</if>
-		<then>
-			<fact name="is_gebouw">yes</fact>
-		</then>
+			<then>
+				<fact name="has_form">concerto</fact>
+			</then>
 	</rule>
 
-	<question>
-		<description>Heeft de bouwconstructie een brandcompartiment?</description>
-		<option>
-			<description>De bouwconstructie heeft een brandcompartiment</description>
+	<rule>
+		<description>It is a orchestral suite</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">yes</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_structure">danceforms</fact>
+			</and>
+		</if>
 			<then>
-				<fact name="heeft_brandcompartiment">yes</fact>
+				<fact name="has_form">orchestralsuite</fact>
+			</then>
+	</rule>
+
+	<rule>
+		<description>It is an Ouverture</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">yes</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_structure">undefined</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">ouverture</fact>
+			</then>
+	</rule>
+
+
+<!-- /////////////////////////no singing / no orchestra -->
+
+
+
+
+<!-- has piano -->
+
+	<rule>
+		<description>It is a piano trio</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_piano">yes</fact>
+				<fact name="has_violin">yes</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">trio</fact>
+			</then>
+	</rule>
+
+<!-- no differentiation yet between quartet quintet -->
+	<rule>
+		<description>It is a piano quartet/quintet</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_piano">yes</fact>
+				<fact name="has_violin">yes</fact>
+				<fact name="has_viola">yes</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">quartet</fact>
+			</then>
+	</rule>
+
+<!--has no piano -->
+	<rule>
+		<description>It is a string quartet</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_piano">no</fact>
+				<!-- piano fact may be superfluous -->
+				<fact name="has_violin">yes</fact>
+				<fact name="has_viola">yes</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">stringquartet</fact>
+			</then>
+	</rule>
+
+	<rule>
+		<description>It is a duet</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<!-- confusing: one instrument, but heard two times -->
+				<fact name="has_one_instrument">yes</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">duet</fact>
+			</then>
+	</rule>
+
+<!-- /////////////////////////has singing / no orchestra -->
+
+<!-- solo -->
+	<rule>
+		<description>It is a Solo piece</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">yes</fact>
+				<fact name="has_musicians">yes</fact>
+				<fact name="has_musicians_count">1</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">Solo</fact>
+			</then>
+	</rule>
+<!-- duet -->
+	<rule>
+		<description>It is a Duet </description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">yes</fact>
+				<fact name="has_musicians">yes</fact>
+				<fact name="has_musicians_count">2</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">Duet</fact>
+			</then>
+	</rule>
+<!-- canon -->
+	<rule>
+		<description>It is a canon </description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">yes</fact>
+				<fact name="has_musicians">yes</fact>
+				<fact name="has_musicians_count">undefined</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">canon</fact>
+			</then>
+	</rule>
+
+<!-- /////////////////////////has singing / has orchestra -->
+
+<!-- opera-->
+
+<rule>
+		<description>It is an opera piece</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">yes</fact>
+				<fact name="has_singing">yes</fact>
+				<fact name="has_lyrics_subject">classical</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">opera</fact>
+			</then>
+	</rule>
+
+<!-- religious -->
+<rule>
+		<description>It is a oratorio</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">yes</fact>
+				<fact name="has_singing">yes</fact>
+				<fact name="has_lyrics_subject">religious</fact>
+				<!-- musicians means vocalist in this context -->
+				<fact name="has_musicians_count">1</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">oratorio</fact>
+			</then>
+	</rule>
+
+	<rule>
+		<description>It is an cantata</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">yes</fact>
+				<fact name="has_singing">yes</fact>
+				<fact name="has_lyrics_subject">religious</fact>
+				<!-- musicians means vocalist in this context -->
+				<fact name="has_musicians_count">undefined</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">cantata</fact>
+			</then>
+	</rule>
+
+
+	<!--  -->
+	<question>
+		<description>do you hear an orchestra?</description>
+		<option>
+			<description>I do hear an orchestra</description>
+			<then>
+				<fact name="has_orchestra">yes</fact>
 			</then>
 		</option>
 		<option>
-			<description>De bouwgconstructie heeft geen brandcompartiment</description>
+			<description>I don't hear an orchestra</description>
 			<then>
-				<fact name="heeft_brandcompartiment">no</fact>
+				<fact name="has_orchestra">no</fact>
 			</then>
 		</option>
 	</question>
 
 	<question>
-		<description>Wat zijn de gebruiksfuncties voor het gebouw?</description>
+		<description>do you hear a person singing?</description>
 		<option>
-			<description><![CDATA[Woonfunctie zoals beschreven in <a href="#">NEN1234</a>]]></description>
+			<description>I hear a person singing</description>
 			<then>
-				<fact name="gebruiksfunctie">woonfunctie</fact>
+				<fact name="has_singing">yes</fact>
 			</then>
 		</option>
 		<option>
-			<description>Bijeenkomstfunctie</description>
+			<description>I don't hear a person singing</description>
 			<then>
-				<fact name="gebruiksfunctie">bijeenkomstfunctie</fact>
-			</then>
-		</option>
-		<option>
-			<description>Industriefunctie</description>
-			<then>
-				<fact name="gebruiksfunctie">industriefunctie</fact>
-			</then>
-		</option>
-		<option>
-			<description>Kantoorfunctie</description>
-			<then>
-				<fact name="gebruiksfunctie">kantoorfunctie</fact>
-			</then>
-		</option>
-		<option>
-			<description>Winkelfunctie</description>
-			<then>
-				<fact name="gebruiksfunctie">winkelfunctie</fact>
+				<fact name="has_singing">yes</fact>
 			</then>
 		</option>
 	</question>
 
-	<goal name="regels_van_toepassing">
-		<description>Zijn de regels van toepassing?</description>
-		<answer value="yes">Ja, de regels zijn van toepassing.</answer>
-		<answer value="no">Nee, deze situatie is niet specifiek beschreven in de regelgeving.</answer>
-		<answer value="undefined">Geen idee</answer>
+
+
+
+	<goal name="has_form">
+		<description>has form plays music</description>
+		<answer value="symphony">Symphony</answer>
+		<answer value="Duet">Duet</answer>
+		<answer value="undefined">undefined</answer>
 	</goal>
+
+
 </knowledge>
