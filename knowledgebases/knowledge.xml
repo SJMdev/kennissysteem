@@ -1,12 +1,30 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <knowledge>
-	<title>Music piece identification?</title>
-	<description>description here</description>
+	<title>Music piece form identification?</title>
+	<description>This knowledge base helps a user with finding the form of a classical music piece</description>
 
-<!--  has orchestra / no singing -->
+    <goal name="has_form">
+        <description>The piece has the following form:</description>
+		<answer value="Symphony">Symphony</answer>
+		<answer value="Oratorio">Oratorio</answer>
+		<answer value="Cantata">Cantata</answer>
+		<answer value="Recitative">Recitative</answer>
+		<answer value="Opera">Opera</answer>
+		<answer value="Concerto">Concerto</answer>
+		<answer value="Orchestral Suite">Orchestral Suite</answer>
+		<answer value="Ouverture">Ouverture</answer>
+		<answer value="Duet">Duet</answer>
+		<answer value="String Quartet">String Quartet</answer>
+		<answer value="Piano Quartet">Piano Quartet</answer>
+		<answer value="Piano Trio">Piano Trio</answer>
+		<answer value="Piano Quintet">Piano Quintet</answer>
+		<answer value="Canon">Canon</answer>
+		<answer value="Solo Music">Solo Music</answer>
+		<answer>I don't know what form this piece has, sorry</answer>
+	</goal>
 
-
+<!-- /////////////////////////no singing / orchestra -->
 	<rule>
 		<description>It is a symphony</description>
 		<if>
@@ -17,7 +35,7 @@
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">symphony</fact>
+				<fact name="has_form">Symphony</fact>
 			</then>
 	</rule>
 
@@ -27,16 +45,16 @@
 			<and>
 				<fact name="has_orchestra">yes</fact>
 				<fact name="has_singing">no</fact>
-				<fact name="has_structure">dialogue</fact>
+				<fact name="has_structure">dialoque</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">concerto</fact>
+				<fact name="has_form">Concerto</fact>
 			</then>
 	</rule>
 
 	<rule>
-		<description>It is a orchestral suite</description>
+		<description>It is an orchestral suite</description>
 		<if>
 			<and>
 				<fact name="has_orchestra">yes</fact>
@@ -45,21 +63,21 @@
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">orchestralsuite</fact>
+				<fact name="has_form">Orchestral Suite</fact>
 			</then>
 	</rule>
 
 	<rule>
-		<description>It is an Ouverture</description>
+		<description>It is an ouverture</description>
 		<if>
 			<and>
 				<fact name="has_orchestra">yes</fact>
 				<fact name="has_singing">no</fact>
-				<fact name="has_structure">undefined</fact>
+				<fact name="has_structure">abstractof</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">ouverture</fact>
+				<fact name="has_form">Ouverture</fact>
 			</then>
 	</rule>
 
@@ -77,29 +95,44 @@
 			<and>
 				<fact name="has_orchestra">no</fact>
 				<fact name="has_singing">no</fact>
-				<fact name="has_piano">yes</fact>
-				<fact name="has_violin">yes</fact>
+				<fact name="has_instruments">piano</fact>
+				<fact name="has_violin">1</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">trio</fact>
+				<fact name="has_form">Piano Trio</fact>
 			</then>
 	</rule>
 
-<!-- no differentiation yet between quartet quintet -->
 	<rule>
-		<description>It is a piano quartet/quintet</description>
+		<description>It is a piano quartet</description>
 		<if>
 			<and>
 				<fact name="has_orchestra">no</fact>
 				<fact name="has_singing">no</fact>
-				<fact name="has_piano">yes</fact>
-				<fact name="has_violin">yes</fact>
+				<fact name="has_instruments">piano</fact>
+				<fact name="has_violin">1</fact>
 				<fact name="has_viola">yes</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">quartet</fact>
+				<fact name="has_form">Piano Quartet</fact>
+			</then>
+	</rule>
+
+	<rule>
+		<description>It is a piano quintet</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_instruments">piano</fact>
+				<fact name="has_violin">2</fact>
+				<fact name="has_viola">yes</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">Piano Quintet</fact>
 			</then>
 	</rule>
 
@@ -110,29 +143,34 @@
 			<and>
 				<fact name="has_orchestra">no</fact>
 				<fact name="has_singing">no</fact>
-				<fact name="has_piano">no</fact>
-				<!-- piano fact may be superfluous -->
-				<fact name="has_violin">yes</fact>
-				<fact name="has_viola">yes</fact>
+				<fact name ="has_instruments">strings</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">stringquartet</fact>
+				<fact name="has_form">String Quartet</fact>
 			</then>
 	</rule>
 
 	<rule>
 		<description>It is a duet</description>
 		<if>
-			<and>
-				<fact name="has_orchestra">no</fact>
-				<fact name="has_singing">no</fact>
-				<!-- confusing: one instrument, but heard two times -->
-				<fact name="has_one_instrument">yes</fact>
-			</and>
+		    <or>
+                <and>
+                    <fact name="has_orchestra">no</fact>
+                    <fact name="has_singing">no</fact>
+                    <fact name="has_instruments">twoidentical</fact>
+                </and>
+
+                <and>
+                    <fact name="has_orchestra">no</fact>
+                    <fact name="has_singing">yes</fact>
+                    <fact name="has_musicians_count">2</fact>
+                </and>
+			</or>
+
 		</if>
 			<then>
-				<fact name="has_form">duet</fact>
+				<fact name="has_form">Duet</fact>
 			</then>
 	</rule>
 
@@ -140,34 +178,20 @@
 
 <!-- solo -->
 	<rule>
-		<description>It is a Solo piece</description>
+		<description>It is a solo piece</description>
 		<if>
 			<and>
 				<fact name="has_orchestra">no</fact>
 				<fact name="has_singing">yes</fact>
-				<fact name="has_musicians">yes</fact>
 				<fact name="has_musicians_count">1</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">Solo</fact>
+				<fact name="has_form">Solo Music</fact>
 			</then>
 	</rule>
-<!-- duet -->
-	<rule>
-		<description>It is a Duet </description>
-		<if>
-			<and>
-				<fact name="has_orchestra">no</fact>
-				<fact name="has_singing">yes</fact>
-				<fact name="has_musicians">yes</fact>
-				<fact name="has_musicians_count">2</fact>
-			</and>
-		</if>
-			<then>
-				<fact name="has_form">Duet</fact>
-			</then>
-	</rule>
+
+
 <!-- canon -->
 	<rule>
 		<description>It is a canon </description>
@@ -175,12 +199,11 @@
 			<and>
 				<fact name="has_orchestra">no</fact>
 				<fact name="has_singing">yes</fact>
-				<fact name="has_musicians">yes</fact>
-				<fact name="has_musicians_count">undefined</fact>
+                <fact name="has_musicians_count">morethan2</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">canon</fact>
+				<fact name="has_form">Canon</fact>
 			</then>
 	</rule>
 
@@ -191,54 +214,79 @@
 <rule>
 		<description>It is an opera piece</description>
 		<if>
-			<and>
-				<fact name="has_orchestra">yes</fact>
-				<fact name="has_singing">yes</fact>
-				<fact name="has_lyrics_subject">classical</fact>
-			</and>
+		    <or>
+                <and>
+                    <fact name="has_orchestra">yes</fact>
+                    <fact name="has_singing">yes</fact>
+                    <fact name="has_lyrics_subject">classical</fact>
+                </and>
+
+                <and>
+                    <fact name="has_orchestra">yes</fact>
+                    <fact name="has_singing">yes</fact>
+                    <fact name="has_lyrics_subject">neither</fact>
+                    <fact name="has_fit">costume</fact>
+                </and>
+
+			</or>
 		</if>
 			<then>
-				<fact name="has_form">opera</fact>
+				<fact name="has_form">Opera</fact>
 			</then>
 	</rule>
 
+<rule>
+		<description>It is a recitative</description>
+		<if>
+
+                <and>
+                    <fact name="has_orchestra">yes</fact>
+                    <fact name="has_singing">yes</fact>
+                    <fact name="has_lyrics_subject">neither</fact>
+                    <fact name="has_fit">minimalorchestra</fact>
+                </and>
+
+
+		</if>
+			<then>
+				<fact name="has_form">Recitative</fact>
+			</then>
+	</rule>
 <!-- religious -->
 <rule>
-		<description>It is a oratorio</description>
+		<description>It is an oratorio</description>
 		<if>
 			<and>
 				<fact name="has_orchestra">yes</fact>
 				<fact name="has_singing">yes</fact>
 				<fact name="has_lyrics_subject">religious</fact>
-				<!-- musicians means vocalist in this context -->
-				<fact name="has_musicians_count">1</fact>
+			    <fact name="has_fit_rel">singsupport</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">oratorio</fact>
+				<fact name="has_form">Oratorio</fact>
 			</then>
 	</rule>
 
 	<rule>
-		<description>It is an cantata</description>
+		<description>It is a cantata</description>
 		<if>
 			<and>
 				<fact name="has_orchestra">yes</fact>
 				<fact name="has_singing">yes</fact>
 				<fact name="has_lyrics_subject">religious</fact>
-				<!-- musicians means vocalist in this context -->
-				<fact name="has_musicians_count">undefined</fact>
+				<fact name="has_fit_rel">baroqueorchestra</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">cantata</fact>
+				<fact name="has_form">Cantata</fact>
 			</then>
 	</rule>
 
 
 	<!--  -->
 	<question>
-		<description>do you hear an orchestra?</description>
+		<description>Do you hear an orchestra?</description>
 		<option>
 			<description>I do hear an orchestra</description>
 			<then>
@@ -254,30 +302,223 @@
 	</question>
 
 	<question>
-		<description>do you hear a person singing?</description>
+		<description>Do you hear singing?</description>
 		<option>
-			<description>I hear a person singing</description>
+			<description>I hear singing</description>
 			<then>
 				<fact name="has_singing">yes</fact>
 			</then>
 		</option>
 		<option>
-			<description>I don't hear a person singing</description>
+			<description>I don't hear singing</description>
 			<then>
-				<fact name="has_singing">yes</fact>
+				<fact name="has_singing">no</fact>
 			</then>
 		</option>
 	</question>
 
 
+	<question>
+		<description>Which of the following structures fits best?</description>
+		<option>
+			<description>The piece has four parts( 1: changes, 2: calmer,3: 3/4 measure,4: final)</description>
+			<then>
+				<fact name="has_structure">4parts</fact>
+			</then>
+		</option>
+		<option>
+			<description>The piece is a dialoque between the different instruments</description>
+			<then>
+				<fact name="has_structure">dialoque</fact>
+			</then>
+		</option>
+		<option>
+			<description>The piece has a lot of different themes following each other.  </description>
+			<then>
+				<fact name="has_structure">abstractof</fact>
+			</then>
+		</option>
+		<option>
+			<description>The piece has different parts based on dance forms</description>
+			<then>
+				<fact name="has_structure">da <question>
+		<description>Choose what fits best</description>
+		<option>
+			<description>The piece has a minimal orchestra, singer sings simple melodies</description>
+			<then>
+				<fact name="has_fit">minimalorchestra</fact>
+			</then>
+		</option>
+		<option>
+			<description>The singing is dramatical, there are possibly figurants in costumes</description>
+			<then>
+				<fact name="has_fit">costume</fact>
+			</then>
+		</option>
+    </question>nceforms</fact>
+			</then>
+		</option>
+	</question>
+
+    <question>
+		<description>What instruments do you hear?</description>
+		<option>
+			<description>I hear a piano plus strings</description>
+			<then>
+				<fact name="has_instruments">piano</fact>
+			</then>
+		</option>
+		<option>
+			<description>I hear four string instruments(two violins, a viola and a cello)</description>
+			<then>
+				<fact name="has_instruments">strings</fact>
+			</then>
+		</option>
+		<option>
+			<description>I hear two identical instruments</description>
+			<then>
+				<fact name="has_instruments">twoidentical</fact>
+			</then>
+		</option>
+	</question>
+
+    <question>
+		<description>Do you hear viola?</description>
+		<option>
+			<description>I hear viola</description>
+			<then>
+				<fact name="has_viola">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>I don't hear viola</description>
+			<then>
+				<fact name="has_viola">no</fact>
+			</then>
+		</option>
+	</question>
+
+    <question>
+		<description>Do you hear violin(s)?</description>
+		<option>
+			<description>I hear one violin</description>
+			<then>
+				<fact name="has_violin">1</fact>
+			</then>
+		</option>
+		<option>
+			<description>I hear two violins</description>
+			<then>
+				<fact name="has_violin">2</fact>
+			</then>
+		</option>
+		<option>
+			<description>I don't hear a violin</description>
+			<then>
+				<fact name="has_violin">no</fact>
+			</then>
+		</option>
+	</question>
+
+	 <question>
+		<description>What is the amount of musicians you hear?</description>
+		<option>
+			<description>I hear one musician</description>
+			<then>
+				<fact name="has_musicians_count">1</fact>
+			</then>
+		</option>
+		<option>
+			<description>I hear two musicians</description>
+			<then>
+				<fact name="has_musicians_count">2</fact>
+			</then>
+		</option>
+		<option>
+			<description>I hear more than two musicians</description>
+			<then>
+				<fact name="has_musicians_count">morethan2</fact>
+			</then>
+		</option>
+	</question>
+
+	<question>
+		<description>What is the amount of musicians you hear?</description>
+		<option>
+			<description>I hear one musician</description>
+			<then>
+				<fact name="has_musicians_count">1</fact>
+			</then>
+		</option>
+		<option>
+			<description>I hear two musicians</description>
+			<then>
+				<fact name="has_musicians_count">2</fact>
+			</then>
+		</option>
+		<option>
+			<description>I hear more than two musicians</description>
+			<then>
+				<fact name="has_musicians_count">morethan2</fact>
+			</then>
+		</option>
+	</question>
+
+    <question>
+		<description>What is the subject of the lyrics?</description>
+		<option>
+			<description>religious</description>
+			<then>
+				<fact name="has_lyrics_subject">religious</fact>
+			</then>
+		</option>
+		<option>
+			<description>A story from the classical period</description>
+			<then>
+				<fact name="has_lyrics_subject">classical</fact>
+			</then>
+		</option>
+		<option>
+			<description>neither of those</description>
+			<then>
+				<fact name="has_lyrics_subject">neither</fact>
+			</then>
+		</option>
+	</question>
+
+    <question>
+		<description>Choose what fits best</description>
+		<option>
+			<description>The piece has a minimal orchestra, singer sings simple melodies</description>
+			<then>
+				<fact name="has_fit">minimalorchestra</fact>
+			</then>
+		</option>
+		<option>
+			<description>The singing is dramatical, there are possibly figurants in costumes</description>
+			<then>
+				<fact name="has_fit">costume</fact>
+			</then>
+		</option>
+    </question>
+
+    <question>
+		<description>Choose what fits best</description>
+		<option>
+			<description>The piece has a baroque orchestra</description>
+			<then>
+				<fact name="has_fit_rel">baroqueorchestra</fact>
+			</then>
+		</option>
+		<option>
+			<description>one singer tells the story, supported by orchestra and other singers</description>
+			<then>
+				<fact name="has_fit_rel">singsupport</fact>
+			</then>
+		</option>
+    </question>
 
 
-	<goal name="has_form">
-		<description>has form plays music</description>
-		<answer value="symphony">Symphony</answer>
-		<answer value="Duet">Duet</answer>
-		<answer value="undefined">undefined</answer>
-	</goal>
 
 
 </knowledge>
