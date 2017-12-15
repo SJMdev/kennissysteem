@@ -210,6 +210,10 @@ class KnowledgeBaseReader
 				case 'description':
 					$question->description = $this->parseText($childNode);
 					break;
+
+				case 'audio':
+					$question->audio_file = $this->parseAudio($childNode);
+					break;
 				
 				case 'option':
 					$question->options[] = $this->parseOption($childNode);
@@ -246,6 +250,11 @@ class KnowledgeBaseReader
 				$question->inferred_facts->push($inferred_fact);
 		
 		return $question;
+	}
+
+	private function parseAudio($node)
+	{
+		return $this->parseText($node);
 	}
 
 	private function parseGoal($node)

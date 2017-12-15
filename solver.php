@@ -57,6 +57,8 @@ class Question
 
 	public $description;
 
+	public $audio_file;
+
 	public $options = array();
 
 	public $priority = 0;
@@ -88,6 +90,8 @@ class AskedQuestion extends Question
 		$this->description = $question->description;
 
 		$this->options = $question->options;
+
+		$this->audio_file = $question->audio_file;
 
 		$this->skippable = $skippable;
 	}
