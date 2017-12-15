@@ -286,7 +286,7 @@
 
 	<!--  -->
 	<question>
-		<audio>../soundbytes/instruments/orchestra.mpeg</audio>
+		<audio>/soundbytes/instruments/orchestra.mpeg</audio>
 		<description>Do you hear an orchestra?</description>
 		<option>
 			<description>I do hear an orchestra</description>
@@ -390,7 +390,7 @@
 	</question>
 
     <question>
-    <audio>../soundbytes/instruments/viola.mpeg</audio>
+    <audio>soundbytes/instruments/viola.mpeg</audio>
 		<description>Do you hear viola?</description>
 		<option>
 			<description>I hear viola</description>
@@ -407,7 +407,7 @@
 	</question>
 
     <question>
-    <audio>../soundbytes/instruments/violin.mpeg</audio>
+    <audio>soundbytes/instruments/violin.mpeg</audio>
 		<description>Do you hear violin(s)?</description>
 		<option>
 			<description>I hear one violin</description>
