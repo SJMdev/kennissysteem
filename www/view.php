@@ -6,6 +6,8 @@ include '../reader.php';
 if (!preg_match('/^[a-zA-Z0-9_\-\.]+\.xml$/i', $_GET['kb']))
 	die('Doe eens niet!');
 
+// $file = '../knowledgebases/knowledge.xml';
+
 $file = first_found_path(array(
 	'./' . $_GET['kb'],
 	'../knowledgebases/' . $_GET['kb']

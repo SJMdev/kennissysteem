@@ -341,7 +341,13 @@
 		<option>
 			<description>The piece has different parts based on dance forms</description>
 			<then>
-				<fact name="has_structure">da <question>
+				<fact name="has_structure">danceforms</fact>
+			</then>
+		</option>
+	</question>
+
+
+	<question>
 		<description>Choose what fits best</description>
 		<option>
 			<description>The piece has a minimal orchestra, singer sings simple melodies</description>
@@ -354,9 +360,9 @@
 			<then>
 				<fact name="has_fit">costume</fact>
 			</then>
-		</option>
+<!-- 		</option>
     </question>nceforms</fact>
-			</then>
+			</then> -->
 		</option>
 	</question>
 

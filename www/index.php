@@ -156,5 +156,5 @@ class WebFrontend
 // 	redirect('index.php');
 
 header('Content-Type: text/html; charset=UTF-8');
-$frontend = new WebFrontend('../knowledgebases/crossing.xml');
+$frontend = new WebFrontend('../knowledgebases/knowledge.xml');
 $frontend->main();
