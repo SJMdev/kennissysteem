@@ -6,11 +6,28 @@
 
     <goal name="has_form">
         <description>The piece has the following form:</description>
-		<answer value="Symphony" youtube="tgbNymZ7vqY">Symphony</answer>
-		<answer value="Oratorio">Oratorio</answer>
+
+		<answer value="Symphony" youtube="jv2WJMVPQi8"><![CDATA[<b>Symphony</b> <br /> A symphony large symphonic musical
+            composition piece which often consists of four distinct parts. It is played by a symphony orchestra
+            consisting of: strings, woodwinds, brass and various percussion.]]>
+        </answer>
+
+        <answer value="Oratorio" youtube="jyFxGu9-CfA"><![CDATA[<b>Oratorio</b> <br /> An Oratorio tells a story from the bible.
+            One person tells/sings the story while being accompanied by singers who have small roles and a choir who
+            for instance take the role of the people. There can be orchestra. A famous example is a Passion,
+            an Oratorio telling a story about Jesus. ]]>
+        </answer>
+
 		<answer value="Cantata">Cantata</answer>
 		<answer value="Recitative">Recitative</answer>
-		<answer value="Opera">Opera</answer>
+
+		<answer value="Opera" youtube="x8OHbbmfnW8"><![CDATA[<b>Opera</b> <br /> AAn Opera tells a story,
+            usually one from the classical period but sometimes more modern stories as well (almost never
+            religious ones though). The story is sung by a soloist, accompanied by an orchestra and choir.
+            The singing is musical like, dramatic with possibly bombastic orchestras. The soloists wear
+            costumes and there are figurants. ]]>
+		</answer>
+
 		<answer value="Concerto">Concerto</answer>
 		<answer value="Orchestral Suite">Orchestral Suite</answer>
 		<answer value="Ouverture">Ouverture</answer>
@@ -21,10 +38,10 @@
 		<answer value="Piano Quintet">Piano Quintet</answer>
 		<answer value="Canon">Canon</answer>
 		<answer value="Solo Music">Solo Music</answer>
-		<answer value="Solo Music">Partita</answer>
-		<answer value="Piano Music">Piano Sonata</answer>
-		<answer value="Violin Music">Violin Sonata</answer>
-		<answer value="Cello Music">Cello Sonata</answer>
+		<answer value="Partita">Partita</answer>
+		<answer value="Piano Sonata">Piano Sonata</answer>
+		<answer value="Violin Sonata">Violin Sonata</answer>
+		<answer value="Cello Sonata">Cello Sonata</answer>
 		<answer>I don't know what form this piece has, sorry</answer>
 	</goal>
 
@@ -90,6 +107,37 @@
 
 
 
+<!-- has single instrument -->
+
+    <rule>
+		<description>It is a piano sonata</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_instruments">soloinstrument</fact>
+				<fact name="has_sonatastructure_piano">1</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">Piano Sonata</fact>
+			</then>
+    </rule>
+
+    <rule>
+		<description>It is a partita</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_instruments">soloinstrument</fact>
+				<fact name="has_partitastructure">1</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">Partita</fact>
+			</then>
+    </rule>
 
 <!-- has piano -->
 
@@ -105,23 +153,25 @@
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">Piano Trio</fact>
+				<fact name="has_form">Violin Sonata</fact>
 			</then>
 
 	</rule>
-		<rule>
+
+    <rule>
 		<description>It is a cello sonata</description>
 		<if>
 			<and>
 				<fact name="has_orchestra">no</fact>
 				<fact name="has_singing">no</fact>
 				<fact name="has_instruments">piano</fact>
+				<fact name="has_violin">0</fact>
 				<fact name="has_cello">1</fact>
 				<fact name="has_sonatastructure">1</fact>
 			</and>
 		</if>
 			<then>
-				<fact name="has_form">Piano Trio</fact>
+				<fact name="has_form">Cello Sonata</fact>
 			</then>
 	</rule>
 
@@ -134,8 +184,10 @@
 				<fact name="has_singing">no</fact>
 				<fact name="has_instruments">piano</fact>
 				<fact name="has_violin">1</fact>
+				<fact name="has_sonatastructure">0</fact>
 				<fact name="has_cello">1</fact>
-			</and>
+				<fact name="has_viola">0</fact>
+            </and>
 		</if>
 			<then>
 				<fact name="has_form">Piano Trio</fact>
@@ -150,8 +202,10 @@
 				<fact name="has_singing">no</fact>
 				<fact name="has_instruments">piano</fact>
 				<fact name="has_violin">1</fact>
-				<fact name="has_viola">yes</fact>
-			</and>
+				<fact name="has_sonatastructure">0</fact>
+				<fact name="has_cello">1</fact>
+				<fact name="has_viola">1</fact>
+            </and>
 		</if>
 			<then>
 				<fact name="has_form">Piano Quartet</fact>
@@ -166,7 +220,8 @@
 				<fact name="has_singing">no</fact>
 				<fact name="has_instruments">piano</fact>
 				<fact name="has_violin">2</fact>
-				<fact name="has_viola">yes</fact>
+				<fact name="has_viola">1</fact>
+				<fact name="has_cello">1</fact>
 			</and>
 		</if>
 			<then>
@@ -273,6 +328,7 @@
 			</then>
 	</rule>
 
+<!-- recitative-->
 <rule>
 		<description>It is a recitative</description>
 		<if>
@@ -322,9 +378,15 @@
 	</rule>
 
 
-	<!--  -->
+	<!--  ////////////////Questions -->
+
+
+<!--  We start with the two questions that give us the most information:
+        Does the piece have an orchestra? and Does the piece have singing?-->
+
+
 	<question>
-		<audio>soundbytes/instruments/orchestra.mpeg</audio>
+		<audio>soundbytes/instruments/orchestra.mp3</audio>
 		<description><![CDATA[Do you hear an orchestra?<br />]]> </description>
 		<option>
 			<description>I do hear an orchestra</description>
@@ -341,6 +403,7 @@
 	</question>
 
 	<question>
+	    <audio>soundbytes/instruments/singing.mp3</audio>
 		<description>Do you hear singing?</description>
 		<option>
 			<description>I hear singing</description>
@@ -356,6 +419,7 @@
 		</option>
 	</question>
 
+<!-- /////////////////////////no singing / has orchestra -->
 
 	<question>
 		<description>Which of the following structures fits best?</description>
@@ -386,25 +450,7 @@
 	</question>
 
 
-	<question>
-		<description>Choose what fits best</description>
-		<option>
-			<description>The piece has a minimal orchestra, singer sings simple melodies</description>
-			<then>
-				<fact name="has_fit">minimalorchestra</fact>
-			</then>
-		</option>
-		<option>
-			<description>The singing is dramatical, there are possibly figurants in costumes</description>
-			<then>
-				<fact name="has_fit">costume</fact>
-			</then>
-<!-- 		</option>
-    </question>nceforms</fact>
-			</then> -->
-		</option>
-	</question>
-
+<!-- /////////////////////////no singing / no orchestra -->
     <question>
 		<description>What instruments do you hear?</description>
 		<option>
@@ -425,7 +471,18 @@
 				<fact name="has_instruments">twoidentical</fact>
 			</then>
 		</option>
+		<option>
+			<description>I hear one instrument</description>
+			<then>
+				<fact name="has_instruments">soloinstrument</fact>
+			</then>
+		</option>
 	</question>
+
+
+
+<!-- If there is a piano and strings we need to find out which string instruments are involved' -->
+
 
     <question>
     <audio>soundbytes/instruments/viola.mpeg</audio>
@@ -433,20 +490,20 @@
 		<option>
 			<description>I hear viola</description>
 			<then>
-				<fact name="has_viola">yes</fact>
+				<fact name="has_viola">1</fact>
 			</then>
 		</option>
 		<option>
 			<description>I don't hear viola</description>
 			<then>
-				<fact name="has_viola">no</fact>
+				<fact name="has_viola">0</fact>
 			</then>
 		</option>
 	</question>
 
     <question>
     <audio>soundbytes/instruments/violin.mpeg</audio>
-		<description>Do you hear violin(s) or cello(s)?</description>
+    		<description>Do you hear violin(s)?</description>
 		<option>
 			<description>I hear one violin</description>
 			<then>
@@ -454,13 +511,7 @@
 			</then>
 		</option>
 		<option>
-			<description>I hear one cello</description>
-			<then>
-				<fact name="has_cello">1</fact>
-			</then>
-		</option>
-		<option>
-			<description>I hear two violins or a cello and violin</description>
+			<description>I hear two violins</description>
 			<then>
 				<fact name="has_violin">2</fact>
 			</then>
@@ -468,29 +519,66 @@
 		<option>
 			<description>I don't hear a violin</description>
 			<then>
-				<fact name="has_violin">no</fact>
+				<fact name="has_violin">0</fact>
 			</then>
 		</option>
 	</question>
 
-	<question>
-		<description>Does the piece fit the following structure? Different movements, most commonly:
-1: Development of theme
-2: Slow movement
-3: Closing movement</description>
+	    <question>
+    <audio>soundbytes/instruments/cello.mpeg</audio>
+    		<description>Do you hear a cello?</description>
+		<option>
+			<description>I hear a cello</description>
+			<then>
+				<fact name="has_cello">1</fact>
+			</then>
+		</option>
+		<option>
+			<description>I don't hear a cello</description>
+			<then>
+				<fact name="has_cello">0</fact>
+			</then>
+		</option>
+	</question>
+
+
+	<!-- If it's piano and a cello or violin it likely is violin or cello sonata' -->
+    <question>
+		<description>Does the piece fit the following structure? Different movements, most commonly: 1: Development of theme, 2: Slow movement, 3: Closing movement</description>
 		<option>
 			<description>yes</description>
 			<then>
-				<fact name="has_sonataform">1</fact>
+				<fact name="has_sonatastructure">1</fact>
 			</then>
 		</option>
 		<option>
 			<description>no</description>
 			<then>
-				<fact name="has_sonataform">0</fact>
+				<fact name="has_sonatastructure">0</fact>
 			</then>
 		</option>
     </question>
+
+
+	<!-- If it's a single instrument it likely is a piano sonata or a partita' -->
+
+    <question>
+		<description>Choose what fits best</description>
+		<option>
+			<description>The piece is played on piano and consists of three or four different movements</description>
+			<then>
+				<fact name="has_sonatastructure_piano">1</fact>
+			</then>
+		</option>
+		<option>
+			<description>The piece consists of two movements (A-A or A-B)</description>
+			<then>
+				<fact name="has_partitastructure">1</fact>
+			</then>
+		</option>
+    </question>
+
+<!-- /////////////////////////has singing / no orchestra -->
 
 	 <question>
 		<description>What is the amount of musicians you hear?</description>
@@ -514,27 +602,7 @@
 		</option>
 	</question>
 
-	<question>
-		<description>What is the amount of musicians you hear?</description>
-		<option>
-			<description>I hear one musician</description>
-			<then>
-				<fact name="has_musicians_count">1</fact>
-			</then>
-		</option>
-		<option>
-			<description>I hear two musicians</description>
-			<then>
-				<fact name="has_musicians_count">2</fact>
-			</then>
-		</option>
-		<option>
-			<description>I hear more than two musicians</description>
-			<then>
-				<fact name="has_musicians_count">morethan2</fact>
-			</then>
-		</option>
-	</question>
+<!-- /////////////////////////has singing / has orchestra -->
 
     <question>
 		<description>What is the subject of the lyrics?</description>
