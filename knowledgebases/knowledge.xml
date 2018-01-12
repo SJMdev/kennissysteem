@@ -6,7 +6,7 @@
 
     <goal name="has_form">
         <description>The piece has the following form:</description>
-		<answer value="Symphony">Symphony</answer>
+		<answer value="Symphony" youtube="tgbNymZ7vqY">Symphony</answer>
 		<answer value="Oratorio">Oratorio</answer>
 		<answer value="Cantata">Cantata</answer>
 		<answer value="Recitative">Recitative</answer>

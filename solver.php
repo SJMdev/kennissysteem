@@ -328,6 +328,8 @@ class Answer
 	public $value;
 
 	public $description;
+
+	public $youtube = null;
 }
 
 abstract class TruthState

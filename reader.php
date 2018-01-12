@@ -459,6 +459,10 @@ class KnowledgeBaseReader
 		$answer->value = $node->hasAttribute('value')
 			? $node->getAttribute('value')
 			: null;
+
+		$answer->youtube = $node->hasAttribute('youtube')
+			? $node->getAttribute('youtube')
+			: null;
 		
 		$answer->description = $this->parseText($node);
 
