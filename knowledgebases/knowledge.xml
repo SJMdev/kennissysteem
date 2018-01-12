@@ -21,6 +21,10 @@
 		<answer value="Piano Quintet">Piano Quintet</answer>
 		<answer value="Canon">Canon</answer>
 		<answer value="Solo Music">Solo Music</answer>
+		<answer value="Solo Music">Partita</answer>
+		<answer value="Piano Music">Piano Sonata</answer>
+		<answer value="Violin Music">Violin Sonata</answer>
+		<answer value="Cello Music">Cello Sonata</answer>
 		<answer>I don't know what form this piece has, sorry</answer>
 	</goal>
 
@@ -90,6 +94,39 @@
 <!-- has piano -->
 
 	<rule>
+		<description>It is a violin sonata</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_instruments">piano</fact>
+				<fact name="has_violin">1</fact>
+				<fact name="has_sonatastructure">1</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">Piano Trio</fact>
+			</then>
+
+	</rule>
+		<rule>
+		<description>It is a cello sonata</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_instruments">piano</fact>
+				<fact name="has_cello">1</fact>
+				<fact name="has_sonatastructure">1</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">Piano Trio</fact>
+			</then>
+	</rule>
+
+
+	<rule>
 		<description>It is a piano trio</description>
 		<if>
 			<and>
@@ -97,6 +134,7 @@
 				<fact name="has_singing">no</fact>
 				<fact name="has_instruments">piano</fact>
 				<fact name="has_violin">1</fact>
+				<fact name="has_cello">1</fact>
 			</and>
 		</if>
 			<then>
@@ -408,7 +446,7 @@
 
     <question>
     <audio>soundbytes/instruments/violin.mpeg</audio>
-		<description>Do you hear violin(s)?</description>
+		<description>Do you hear violin(s) or cello(s)?</description>
 		<option>
 			<description>I hear one violin</description>
 			<then>
@@ -416,7 +454,13 @@
 			</then>
 		</option>
 		<option>
-			<description>I hear two violins</description>
+			<description>I hear one cello</description>
+			<then>
+				<fact name="has_cello">1</fact>
+			</then>
+		</option>
+		<option>
+			<description>I hear two violins or a cello and violin</description>
 			<then>
 				<fact name="has_violin">2</fact>
 			</then>
@@ -428,6 +472,25 @@
 			</then>
 		</option>
 	</question>
+
+	<question>
+		<description>Does the piece fit the following structure? Different movements, most commonly:
+1: Development of theme
+2: Slow movement
+3: Closing movement</description>
+		<option>
+			<description>yes</description>
+			<then>
+				<fact name="has_sonataform">1</fact>
+			</then>
+		</option>
+		<option>
+			<description>no</description>
+			<then>
+				<fact name="has_sonataform">0</fact>
+			</then>
+		</option>
+    </question>
 
 	 <question>
 		<description>What is the amount of musicians you hear?</description>
