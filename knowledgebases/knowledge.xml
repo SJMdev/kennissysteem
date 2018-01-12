@@ -286,8 +286,8 @@
 
 	<!--  -->
 	<question>
-		<audio>/soundbytes/instruments/orchestra.mpeg</audio>
-		<description>Do you hear an orchestra?</description>
+		<audio>soundbytes/instruments/orchestra.mpeg</audio>
+		<description><![CDATA[Do you hear an orchestra?<br />]]> </description>
 		<option>
 			<description>I do hear an orchestra</description>
 			<then>
