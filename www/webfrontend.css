@@ -119,6 +119,11 @@ table {
 .completed {
 	max-width: 900px;
 	margin: 0 auto;
+	/*kopie van sjors meuk voor antwoorden*/
+	background: #ffffff;
+	border-radius: 25px;
+	border: 2px solid #333333;
+	padding: 20px;
 }
 
 .completed dt {
