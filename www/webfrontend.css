@@ -134,6 +134,12 @@ table {
 .question {
 	max-width: 600px;
 	margin: 0 auto;
+	/*sjors meuk:*/
+	background: #ffffff;
+	border-radius: 25px;
+	border: 2px solid #333333;
+	padding: 20px;
+
 }
 
 .question p {
