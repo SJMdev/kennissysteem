@@ -12,6 +12,7 @@
             consisting of: strings, woodwinds, brass and various percussion.]]>
         </answer>
 
+<<<<<<< HEAD
         <answer value="Oratorio" youtube="jyFxGu9-CfA"><![CDATA[<b>Oratorio</b> <br /> An oratorio tells a story from the bible.
             One person tells/sings the story while being accompanied by singers who have small roles and a choir who
             for instance take the role of the people. There can be orchestra. A famous example is a passion,
@@ -95,6 +96,38 @@
             piano and cello]]>
 		</answer>
 
+=======
+        <answer value="Oratorio" youtube="jyFxGu9-CfA"><![CDATA[<b>Oratorio</b> <br /> An Oratorio tells a story from the bible.
+            One person tells/sings the story while being accompanied by singers who have small roles and a choir who
+            for instance take the role of the people. There can be orchestra. A famous example is a Passion,
+            an Oratorio telling a story about Jesus. ]]>
+        </answer>
+
+		<answer value="Cantata">Cantata</answer>
+		<answer value="Recitative">Recitative</answer>
+
+		<answer value="Opera" youtube="x8OHbbmfnW8"><![CDATA[<b>Opera</b> <br /> AAn Opera tells a story,
+            usually one from the classical period but sometimes more modern stories as well (almost never
+            religious ones though). The story is sung by a soloist, accompanied by an orchestra and choir.
+            The singing is musical like, dramatic with possibly bombastic orchestras. The soloists wear
+            costumes and there are figurants. ]]>
+		</answer>
+
+		<answer value="Concerto">Concerto</answer>
+		<answer value="Orchestral Suite">Orchestral Suite</answer>
+		<answer value="Ouverture">Ouverture</answer>
+		<answer value="Duet">Duet</answer>
+		<answer value="String Quartet">String Quartet</answer>
+		<answer value="Piano Quartet">Piano Quartet</answer>
+		<answer value="Piano Trio">Piano Trio</answer>
+		<answer value="Piano Quintet">Piano Quintet</answer>
+		<answer value="Canon">Canon</answer>
+		<answer value="Solo Music">Solo Music</answer>
+		<answer value="Partita">Partita</answer>
+		<answer value="Piano Sonata">Piano Sonata</answer>
+		<answer value="Violin Sonata">Violin Sonata</answer>
+		<answer value="Cello Sonata">Cello Sonata</answer>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 		<answer>I don't know what form this piece has, sorry</answer>
 	</goal>
 
@@ -177,6 +210,23 @@
 			</then>
     </rule>
 
+<<<<<<< HEAD
+=======
+    <rule>
+		<description>It is a partita</description>
+		<if>
+			<and>
+				<fact name="has_orchestra">no</fact>
+				<fact name="has_singing">no</fact>
+				<fact name="has_instruments">soloinstrument</fact>
+				<fact name="has_partitastructure">1</fact>
+			</and>
+		</if>
+			<then>
+				<fact name="has_form">Partita</fact>
+			</then>
+    </rule>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 
 <!-- has piano -->
 
@@ -211,6 +261,7 @@
 		</if>
 			<then>
 				<fact name="has_form">Cello Sonata</fact>
+<<<<<<< HEAD
 			</then>
 	</rule>
 
@@ -237,6 +288,8 @@
 		</if>
 			<then>
 				<fact name="has_form">Cello Sonata</fact>
+=======
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 			</then>
 	</rule>
 
@@ -248,7 +301,12 @@
 				<fact name="has_orchestra">no</fact>
 				<fact name="has_singing">no</fact>
 				<fact name="has_instruments">piano</fact>
+<<<<<<< HEAD
 				<fact name="has_violin">1+</fact>
+=======
+				<fact name="has_violin">1</fact>
+				<fact name="has_sonatastructure">0</fact>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 				<fact name="has_cello">1</fact>
 				<fact name="has_viola">0</fact>
             </and>
@@ -265,7 +323,12 @@
 				<fact name="has_orchestra">no</fact>
 				<fact name="has_singing">no</fact>
 				<fact name="has_instruments">piano</fact>
+<<<<<<< HEAD
 				<fact name="has_violin">1+</fact>
+=======
+				<fact name="has_violin">1</fact>
+				<fact name="has_sonatastructure">0</fact>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 				<fact name="has_cello">1</fact>
 				<fact name="has_viola">1</fact>
             </and>
@@ -449,7 +512,11 @@
 
 	<question>
 		<audio>soundbytes/instruments/orchestra.mp3</audio>
+<<<<<<< HEAD
 		<description>Do you hear an orchestra?</description>
+=======
+		<description><![CDATA[Do you hear an orchestra?<br />]]> </description>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 		<option>
 			<description>I do hear an orchestra</description>
 			<then>
@@ -536,7 +603,11 @@
 			</then>
 		</option>
 		<option>
+<<<<<<< HEAD
 			<description>I hear just one instrument</description>
+=======
+			<description>I hear one instrument</description>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 			<then>
 				<fact name="has_instruments">soloinstrument</fact>
 			</then>
@@ -575,6 +646,7 @@
 			</then>
 		</option>
 		<option>
+<<<<<<< HEAD
 			<description>I hear one violin and one or more other string instruments</description>
 			<then>
 				<fact name="has_violin">1+</fact>
@@ -582,12 +654,15 @@
 		</option>
 		<option>
 			<description>I hear two violins and other strings</description>
+=======
+			<description>I hear two violins</description>
 			<then>
 				<fact name="has_violin">2</fact>
 			</then>
 		</option>
 		<option>
 			<description>I don't hear a violin</description>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 			<then>
 				<fact name="has_violin">0</fact>
 			</then>
@@ -606,12 +681,49 @@
 		<option>
 			<description>I don't hear a cello</description>
 			<then>
+<<<<<<< HEAD
+				<fact name="has_violin">0</fact>
+=======
 				<fact name="has_cello">0</fact>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
+			</then>
+		</option>
+	</question>
+
+<<<<<<< HEAD
+	    <question>
+    <audio>soundbytes/instruments/cello.mpeg</audio>
+    		<description>Do you hear a cello?</description>
+=======
+
+	<!-- If it's piano and a cello or violin it likely is violin or cello sonata' -->
+    <question>
+		<description>Does the piece fit the following structure? Different movements, most commonly: 1: Development of theme, 2: Slow movement, 3: Closing movement</description>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
+		<option>
+			<description>I hear a cello</description>
+			<then>
+<<<<<<< HEAD
+				<fact name="has_cello">1</fact>
+=======
+				<fact name="has_sonatastructure">1</fact>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
+			</then>
+		</option>
+		<option>
+			<description>I don't hear a cello</description>
+			<then>
+<<<<<<< HEAD
+				<fact name="has_cello">0</fact>
+=======
+				<fact name="has_sonatastructure">0</fact>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 			</then>
 		</option>
 	</question>
 
 
+<<<<<<< HEAD
 	<!-- If it's piano and a cello or violin it likely is violin or cello sonata' -->
     <question>
 		<description>Does the piece fit the following structure? Different movements, most commonly: 1: Development of theme, 2: Slow movement, 3: Closing movement</description>
@@ -625,6 +737,16 @@
 			<description>no</description>
 			<then>
 				<fact name="has_sonatastructure">0</fact>
+=======
+	<!-- If it's a single instrument it likely is a piano sonata or a partita' -->
+
+    <question>
+		<description>Choose what fits best</description>
+		<option>
+			<description>The piece is played on piano and consists of three or four different movements</description>
+			<then>
+				<fact name="has_sonatastructure_piano">1</fact>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 			</then>
 		</option>
     </question>
@@ -636,11 +758,25 @@
          <audio>soundbytes/instruments/cello.mpeg</audio>
 		<description>Choose the instrument the piece is played on</description>
 		<option>
+<<<<<<< HEAD
 			<description>The song is played on piano</description>
 			<then>
 				<fact name="has_sonatastructure_piano">1</fact>
 			</then>
 		</option>
+=======
+			<description>The piece consists of two movements (A-A or A-B)</description>
+			<then>
+				<fact name="has_partitastructure">1</fact>
+			</then>
+		</option>
+    </question>
+
+<!-- /////////////////////////has singing / no orchestra -->
+
+	 <question>
+		<description>What is the amount of musicians you hear?</description>
+>>>>>>> 17e511477fed9634c3f9f991b38c0fe3de17752a
 		<option>
 			<description>The piece is played on cello (sound fragment)</description>
 			<then>
