@@ -7,9 +7,9 @@
 	<body id="webfrontend">
 		<nav class="site-nav">
 			<a href="<?=$this->attr($_SERVER['REQUEST_URI'])?>">Start over</a>
-			<a href="analyse.php?kb=<?=rawurlencode($_GET['kb'])?>">Analyse</a>
+			<!--<a href="analyse.php?kb=<?=rawurlencode($_GET['kb'])?>">Analyse</a>
 			<a href="index.php">Upload</a>
-			<a href="#debug">Debug</a>
+			<a href="#debug">Debug</a>-->
 		</nav>
 		<header>
 			<h1><?=$this->html($state->title)?></h1>
@@ -39,7 +39,7 @@
 					<?php endforeach ?>
 				</dl>
 			</section>
-			
+
 			<section class="state-info goal-stack">
 				<h3>Goal stack</h3>
 				<ol>
@@ -48,7 +48,7 @@
 					<?php endforeach ?>
 				</ol>
 			</section>
-			
+
 			<section class="state-info rule-state">
 				<h3>Rules</h3>
 				<?php $formatter = new HTMLFormatter($state); ?>
@@ -96,7 +96,7 @@
 				e.preventDefault();
 				radio.get(0).form.submit();
 			});
-		
+
 		$('.question button[type=submit]').hide();
 
 		var panel = $('#debug-info');

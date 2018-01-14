@@ -124,7 +124,7 @@ interface Condition
  *     Conditions, e.g. <fact/>
  * </and>
  */
-class WhenAllCondition implements Condition 
+class WhenAllCondition implements Condition
 {
 	public $conditions;
 
@@ -193,12 +193,12 @@ class WhenAnyCondition implements Condition
 		$values = array();
 		foreach ($this->conditions as $condition)
 			$values[] = $condition->evaluate($state);
-		
+
 		// Is er een ja, dan is dit zeker goed.
 		$yesses = array_filter_type('Yes', $values);
 		if ($yesses)
 			return Yes::because($yesses);
-		
+
 		// Is er een misschien, dan zou dit ook goed kunnen zijn
 		$maybes = array_filter_type('Maybe', $values);
 		if ($maybes)
@@ -285,7 +285,7 @@ class FactCondition implements Condition
 class Goal
 {
 	public $name;
-	
+
 	public $description;
 
 	public $answers;
@@ -298,7 +298,7 @@ class Goal
 	public function answer(KnowledgeState $state)
 	{
 		$state_value = $state->value($this->name);
-		
+
 		foreach ($this->answers as $answer)
 		{
 			$answer_value = $answer->value;
@@ -382,7 +382,7 @@ class No extends TruthState
 	}
 }
 
-class Maybe extends TruthState 
+class Maybe extends TruthState
 {
 	public function negate()
 	{
@@ -414,7 +414,7 @@ class Maybe extends TruthState
 		// de verantwoordelijkheid per uit te rekenen.
 		if (count($factors) == 0)
 			return $effects;
-		
+
 		// iedere factor op hetzelfde niveau heeft evenveel invloed.
 		$percentage_per_factor = $percentage / count($factors);
 
@@ -514,7 +514,7 @@ class KnowledgeState
 	/**
 	 * Past $consequences toe op de huidige $state, en geeft dat als nieuwe state terug.
 	 * Alle $consequences krijgen $reason als reden mee.
-	 * 
+	 *
 	 * @return KnowledgeState
 	 */
 	public function apply(array $consequences)
@@ -607,7 +607,7 @@ class Solver
 	 * goals op te lossen. Als een goal niet op te lossen is, kijkt hij naar
 	 * de meest primaire reden waarom (Maybe::$factors) en voegt hij die factor
 	 * op top van de goal stack.
-	 * Als een goal niet op te lossen is omdat er geen vragen/regels meer voor 
+	 * Als een goal niet op te lossen is omdat er geen vragen/regels meer voor
 	 * zijn geeft hij een Notice en gaat hij verder met de andere goals op de
 	 * stack.
 	 *
@@ -624,7 +624,7 @@ class Solver
 			// probeer het eerste goal op te lossen
 			$result = $this->solve($state, $state->goalStack->top());
 
-			// Oh, dat resulteerde in een vraag. Stel hem (of geef hem terug om 
+			// Oh, dat resulteerde in een vraag. Stel hem (of geef hem terug om
 			// de interface hem te laten stellen eigenlijk.)
 			if ($result instanceof AskedQuestion)
 			{
@@ -656,7 +656,7 @@ class Solver
 					// en dan dat opnieuw proberen te bewijzen?
 					if (iterator_contains($state->goalStack, $main_cause))
 						continue;
-					
+
 					// Het kan niet zijn dat het al eens is opgelost. Dan zou hij
 					// in facts moeten zitten.
 					assert('!$state->solved->contains($main_cause)');
@@ -667,7 +667,7 @@ class Solver
 					$this->log('I added %s to the goal stack. The stack is now %s', [$main_cause, $state->goalStack]);
 
 					// .. en spring terug naar volgende goal op goal-stack!
-					continue 2; 
+					continue 2;
 				}
 
 				// Er zijn geen redenen waarom het goal niet afgeleid kon worden? Ojee!
@@ -678,13 +678,13 @@ class Solver
 
 					$this->log('I mark %s as a STATE_UNDEFINED because I do not know its value ' .
 						'but there are also no rules or questions which I can use to infer it.', [$unsatisfied_goal], LOG_LEVEL_WARNING);
-					
+
 					// en markeer hem dan maar als niet waar (closed-world assumption?)
 					$state->apply(array($unsatisfied_goal => STATE_UNDEFINED));
 
 					// compute the effects of this change by applying the other rules
 					$this->forwardChain($state);
-					
+
 					$state->solved->push($unsatisfied_goal);
 				}
 			}
@@ -731,11 +731,11 @@ class Solver
 
 		if (!($current_value instanceof Maybe && $current_value->factors == new ArrayIterator([$goal])))
 			return $current_value;
-		
+
 		// Is er misschien een regel die we kunnen toepassen
 		$relevant_rules = new CallbackFilterIterator($state->rules->getIterator(),
 			function($rule) use ($goal) { return $rule->infers($goal); });
-		
+
 		// Assume that all relevant rules result in maybe's. If not, something went
 		// horribly wrong in $this->forwardChain()!
 		foreach ($relevant_rules as $rule)
